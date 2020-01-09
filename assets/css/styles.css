@@ -39,6 +39,16 @@ body {
   height: 60px;
   margin-top: -9px;
   margin-right: -10px;
+  animation: girar infinite 30s linear;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ---- BRAND ---- */
