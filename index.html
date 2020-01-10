@@ -56,19 +56,27 @@
 
     <div class="center">
       <section id="content">
-        <h2>Últimos artículos</h2>
+        <h2 class="subheader">Últimos artículos</h2>
+
         <!-- LISTADO ARTÍCULOS -->
-        <article class="article-item">
-          <div class="image-wrap">
-            <img
-              src="https://www.dzoom.org.es/wp-content/uploads/2017/07/seebensee-2384369-810x540.jpg"
-              alt="Paisaje"
-            />
-          </div>
-          <h2>Artículo de prueba</h2>
-          <span class="date">Hace 5 minutos</span>
-          <a href="#">Leer más</a>
-        </article>
+        <div id="articles">
+          <article id="article-template" class="article-item">
+            <div class="image-wrap">
+              <img
+                src="https://www.dzoom.org.es/wp-content/uploads/2017/07/seebensee-2384369-810x540.jpg"
+                alt="Paisaje"
+              />
+            </div>
+            <h2>Artículo de prueba</h2>
+            <span class="date">Hace 5 minutos</span>
+            <a href="#">Leer más</a>
+            
+            <!-- LIMPIAR FLOATS -->
+            <div class="clearfix"></div>
+          </article>
+
+          <!-- AÑADIR ARTÍCULOS VIA JS -->
+        </div>
       </section>
 
       <aside id="sidebar">
@@ -87,6 +95,7 @@
         </div>
       </aside>
 
+      <!-- LIMPIAR FLOATS -->
       <div class="clearfix"></div>
     </div>
 
@@ -96,5 +105,17 @@
         <p>&copy; Máster en Frameworks para Javascript</p>
       </div>
     </footer>
+
+    <script>
+      let template = document.getElementById("article-template");
+      let articles = document.getElementById("articles");
+      for (let index = 0; index < 5; index++) {
+        let clonado = template.cloneNode(true);
+        clonado.removeAttribute("id");
+        let h2 = clonado.getElementsByTagName("h2")[0];
+        h2.innerHTML = h2.textContent + " " + index;
+        articles.appendChild(clonado);
+      }
+    </script>
   </body>
 </html>
