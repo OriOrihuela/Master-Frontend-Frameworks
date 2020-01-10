@@ -285,3 +285,21 @@ input[type="text"]:focus {
 .article-item a:hover {
   text-decoration: underline;
 }
+
+/* --- ARTICLE ITEM DETAIL ---- */
+.article-detail .image-wrap {
+  float: none;
+  width: 100%;
+  height: 300px;
+}
+
+.article-detail .image-wrap img {
+  width: 100%;
+  height: auto;
+}
+
+.article-detail .subheader {
+  margin: 15px 0 0 0;
+  padding-left: 0;
+  border: none;
+}
