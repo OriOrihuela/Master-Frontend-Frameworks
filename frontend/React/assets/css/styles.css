@@ -427,3 +427,9 @@ textarea {
     padding-top: 35px;
   }
 }
+
+@media (max-width: 425px) {
+  .radibuttons {
+    width: max-content;
+  }
+}

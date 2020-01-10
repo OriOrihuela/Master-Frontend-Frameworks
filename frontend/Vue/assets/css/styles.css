@@ -17,7 +17,7 @@ body {
   width: 100%;
   background-color: white;
   border-bottom: 1px solid #ccc;
-  border-top: 5px solid #61dafb;
+  border-top: 5px solid rgba(30, 219, 20, 1);
 }
 
 .center {
@@ -38,16 +38,25 @@ body {
   float: left;
   height: 60px;
   margin-top: -9px;
-  margin-right: -10px;
-  animation: girar infinite 30s linear;
+  margin-right: 10px;
+  animation: latir infinite 2s linear;
 }
 
-@keyframes girar {
-  from {
-    transform: rotate(0deg);
+@keyframes latir {
+  0% {
+    transform: scale(1, 1);
   }
-  to {
-    transform: rotate(360deg);
+
+  50% {
+    transform: scale(1.02, 1.02);
+  }
+
+  55% {
+    transform: scale(0.95, 0.95);
+  }
+
+  100% {
+    transform: scale(1, 1);
   }
 }
 
@@ -87,7 +96,7 @@ body {
 }
 
 #menu a:hover {
-  color: #61dafb;
+  color: rgba(30, 219, 20, 1);
 }
 
 /* ---- CLEARFIX ---- */
@@ -102,12 +111,60 @@ body {
   height: 350px;
   color: white;
   text-shadow: 0px 0px 5px #444;
-  background: rgb(125, 230, 250);
-  background: radial-gradient(
-    circle,
-    rgba(125, 230, 250, 1) 16%,
-    rgba(106, 183, 209, 1) 100%
+
+  /* ---- DEGRADADO CSS ---- */
+  background: rgba(30, 219, 20, 1);
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(30, 219, 20, 1) 0%,
+    rgba(30, 219, 20, 1) 15%,
+    rgba(70, 140, 70, 1) 96%,
+    rgba(70, 140, 70, 1) 100%
   );
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0px,
+    center center,
+    100%,
+    color-stop(0%, rgba(30, 219, 20, 1)),
+    color-stop(15%, rgba(30, 219, 20, 1)),
+    color-stop(96%, rgba(70, 140, 70, 1)),
+    color-stop(100%, rgba(70, 140, 70, 1))
+  );
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(30, 219, 20, 1) 0%,
+    rgba(30, 219, 20, 1) 15%,
+    rgba(70, 140, 70, 1) 96%,
+    rgba(70, 140, 70, 1) 100%
+  );
+  background: -o-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(30, 219, 20, 1) 0%,
+    rgba(30, 219, 20, 1) 15%,
+    rgba(70, 140, 70, 1) 96%,
+    rgba(70, 140, 70, 1) 100%
+  );
+  background: -ms-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(30, 219, 20, 1) 0%,
+    rgba(30, 219, 20, 1) 15%,
+    rgba(70, 140, 70, 1) 96%,
+    rgba(70, 140, 70, 1) 100%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(30, 219, 20, 1) 0%,
+    rgba(30, 219, 20, 1) 15%,
+    rgba(70, 140, 70, 1) 96%,
+    rgba(70, 140, 70, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1edb14', endColorstr='#468c46', GradientType=1 );
 }
 
 #slider h1 {
@@ -351,10 +408,19 @@ textarea {
   }
 }
 
+@media (max-width: 909px) {
+  #logo {
+    width: 265px;
+  }
+
+  #menu {
+    width: auto;
+  }
+}
+
 @media (max-width: 826px) {
   #logo {
     float: none;
-    width: 240px;
     margin: 0 auto;
     margin-top: 20px;
   }
@@ -425,5 +491,11 @@ textarea {
 
   #slider.slider-small h1 {
     padding-top: 35px;
+  }
+}
+
+@media (max-width: 425px) {
+  .radibuttons {
+    width: max-content;
   }
 }
