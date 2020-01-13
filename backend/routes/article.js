@@ -12,12 +12,11 @@ const ROUTER = EXPRESS.Router();
 /**
  * GET routes.
  */
-ROUTER.get("/test-de-controlador", ARTICLE_CONTROLLER.test);
 
 /**
  * POST routes.
  */
-ROUTER.post("/datos-curso", ARTICLE_CONTROLLER.datosCurso);
+ROUTER.post("/save", ARTICLE_CONTROLLER.save);
 
 // Here we export the module.
 module.exports = ROUTER;
