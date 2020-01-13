@@ -6,6 +6,7 @@ const Article = require("../models/article");
 
 // Define the controller with its own different behaviours.
 const CONTROLLER = {
+  // Behaviour to save any article.
   save: (request, response) => {
     // Take the parameters by POST.
     const PARAMS = request.body;
@@ -15,7 +16,7 @@ const CONTROLLER = {
       var validate_content = !VALIDATOR.isEmpty(PARAMS.content);
     } catch (error) {
       // If there is not all the needed data...
-      return response.status(200).send({
+      return response.status(404).send({
         status: "error",
         message: "There is some missing data."
       });
@@ -32,7 +33,7 @@ const CONTROLLER = {
       article.save((error, articleStored) => {
         // If there is any error or the article cannot be saved...
         if (error || !articleStored) {
-          return response.status(404).send({
+          return response.status(500).send({
             status: "error",
             message: "The article has not been saved!"
           });
@@ -45,11 +46,39 @@ const CONTROLLER = {
         }
       });
     } else {
-      return response.status(200).send({
+      return response.status(500).send({
         status: "error",
         message: "Data is not valid."
       });
     }
+  },
+
+  // Behaviour to retrieve all the articles in the DB.
+  getArticles: (request, response) => {
+    // Find all the articles.
+    Article.find({})
+      .sort("-_id")
+      .exec((error, articles) => {
+        // If there is any error...
+        if (error) {
+          return response.status(500).send({
+            status: "error",
+            message: "Error when retrieving the articles."
+          });
+          // Or there are not stored articles in the DB...
+        } else if (!articles) {
+          return response.status(404).send({
+            status: "error",
+            message: "There aren't articles in the DB."
+          });
+          // Return all the articles.
+        } else {
+          return response.status(200).send({
+            status: "success",
+            articles
+          });
+        }
+      });
   }
 };
 
