@@ -113,6 +113,57 @@ const CONTROLLER = {
         });
       }
     });
+  },
+
+  // Behaviour to update the data from an article.
+  update: (request, response) => {
+    // Retrieve the data from the PUT request.
+    const PARAMS = request.body;
+    // Take the ID from the URL.
+    const ARTICLE_ID = request.params.id;
+    // Validate the data.
+    try {
+      var validate_title = !VALIDATOR.isEmpty(PARAMS.title);
+      var validate_content = !VALIDATOR.isEmpty(PARAMS.content);
+    } catch (error) {
+      return response.status(404).send({
+        status: "error",
+        message: "Some data is required to be sent!"
+      });
+    }
+    if (validate_title && validate_content) {
+      // Find and update the article.
+      Article.findOneAndUpdate(
+        { _id: ARTICLE_ID },
+        PARAMS,
+        { new: true },
+        (error, articleUpdated) => {
+          if (error) {
+            return response.status(500).send({
+              status: "error",
+              message: "Error when update!"
+            });
+          } else if (!articleUpdated) {
+            return response.status(404).send({
+              status: "error",
+              message: "The article does not exist!"
+            });
+          } else {
+            // Return a response.
+            return response.status(200).send({
+              status: "success",
+              article: articleUpdated
+            });
+          }
+        }
+      );
+    } else {
+      // If the data is not valid...
+      return response.status(500).send({
+        status: "error",
+        message: "Data is not valid!"
+      });
+    }
   }
 };
 

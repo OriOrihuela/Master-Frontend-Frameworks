@@ -20,5 +20,10 @@ ROUTER.get("/article/:id", ARTICLE_CONTROLLER.getArticle);
  */
 ROUTER.post("/save", ARTICLE_CONTROLLER.save);
 
+/**
+ * PUT routes.
+ */
+ROUTER.put("/article/:id", ARTICLE_CONTROLLER.update);
+
 // Here we export the module.
 module.exports = ROUTER;
