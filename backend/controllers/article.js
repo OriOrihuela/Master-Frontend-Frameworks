@@ -55,8 +55,14 @@ const CONTROLLER = {
 
   // Behaviour to retrieve all the articles in the DB.
   getArticles: (request, response) => {
+    const QUERY = Article.find({});
+    // In case the optional endpoint in the route "last" is required...
+    const LAST = request.params.last;
+    if (LAST || LAST !== undefined) {
+      QUERY.limit(5)
+    }
     // Find all the articles.
-    Article.find({})
+    QUERY
       .sort("-_id")
       .exec((error, articles) => {
         // If there is any error...
