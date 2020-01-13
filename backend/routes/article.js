@@ -13,6 +13,7 @@ const ROUTER = EXPRESS.Router();
  * GET routes.
  */
 ROUTER.get("/articles/:last?", ARTICLE_CONTROLLER.getArticles);
+ROUTER.get("/article/:id", ARTICLE_CONTROLLER.getArticle);
 
 /**
  * POST routes.
