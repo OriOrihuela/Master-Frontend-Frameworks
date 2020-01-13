@@ -1,12 +1,16 @@
 "use strict";
+
 // Import some Node modules.
 const MONGOOSE = require("mongoose");
 const APP = require("./app");
 const PORT = 3900;
+
 // Deactivating old and deprecated behaviours.
 MONGOOSE.set("useFindAndModify", false);
+
 // Promises with MongoDB.
 MONGOOSE.Promise = global.Promise;
+
 // The connection to the local DB.
 MONGOOSE.connect("mongodb://localhost:27017/api_rest_blog", {
   useUnifiedTopology: true,
