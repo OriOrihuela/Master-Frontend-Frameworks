@@ -9,6 +9,10 @@ const ARTICLE_CONTROLLER = require("../controllers/article");
 // Create the router.
 const ROUTER = EXPRESS.Router();
 
+// Create a multi-party variable. It gives us functionality to create a middleware.
+const MULTIPART = require("connect-multiparty");
+const MIDDLEWARE_UPLOAD = MULTIPART({ uploadDir: "./upload/articles" });
+
 /**
  * GET routes.
  */
@@ -19,7 +23,11 @@ ROUTER.get("/article/:id", ARTICLE_CONTROLLER.getArticle);
  * POST routes.
  */
 ROUTER.post("/save", ARTICLE_CONTROLLER.save);
-ROUTER.post("/upload-image/:id", ARTICLE_CONTROLLER.upload);
+ROUTER.post(
+  "/upload-image/:id",
+  MIDDLEWARE_UPLOAD,
+  ARTICLE_CONTROLLER.uploadImage
+);
 
 /**
  * PUT routes.

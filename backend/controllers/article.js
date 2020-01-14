@@ -1,8 +1,15 @@
 "use strict";
 
-// Import some validator module.
+/**
+ * IMPORTS
+ */
+// validator module to check certain conditions.
 const VALIDATOR = require("validator");
+// Article schema.
 const Article = require("../models/article");
+// fs module to get some functionality applied to any file.
+const FS = require("fs");
+const PATH = require("path");
 
 // Define the controller with its own different behaviours.
 const CONTROLLER = {
@@ -196,11 +203,65 @@ const CONTROLLER = {
   },
 
   // Behaviour to upload files.
-  upload: (request, response) => {
-    return response.status(200).send({
-      status: "success",
-      message: "caca"
-    });
+  uploadImage: (request, response) => {
+    // Take the file from the request.
+    let file_name = "Image not uploaded";
+    // In case the request does not bring any image...
+    if (!request.files) {
+      return response.status(404).send({
+        status: "error",
+        message: file_name
+      });
+    }
+    // Get the name and extension from the file.
+    let file_path = request.files.file0.path;
+    let file_split = file_path.split("\\");
+    /**
+     * FOR LINUX AND MAC -> let file_split = file_path.split("/")
+     */
+    // The name:
+    file_name = file_split[2];
+    // The extension:
+    let extension_split = file_name.split(".");
+    let file_extension = extension_split[1];
+    // Check the extension (only images). If it is not valid, delete the file.
+    if (
+      file_extension !== "png" &&
+      file_extension !== "jpg" &&
+      file_extension !== "jpeg" &&
+      file_extension !== "gif"
+    ) {
+      // Delete the uploaded file.
+      FS.unlink(file_path, error => {
+        return response.status(500).send({
+          status: "error",
+          message: "The iamge extension is not valid!"
+        });
+      });
+      // If everything is valid...
+    } else {
+      // Take the article ID from the URL.
+      const ARTICLE_ID = request.params.id;
+      // Look for the article, assign the image to it and update it.
+      Article.findOneAndUpdate(
+        { _id: ARTICLE_ID },
+        { image: file_name },
+        { new: true },
+        (error, articleUpdated) => {
+          if (error || !articleUpdated) {
+            return response.status(500).send({
+              status: "error",
+              message: "Error when saving the image from the article!"
+            });
+          } else {
+            return response.status(200).send({
+              status: "success",
+              article: articleUpdated
+            });
+          }
+        }
+      );
+    }
   }
 };
 
