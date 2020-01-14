@@ -1,8 +1,15 @@
 "use strict";
 
-// Import some validator module.
+/**
+ * IMPORTS
+ */
+// validator module to check certain conditions.
 const VALIDATOR = require("validator");
+// Article schema.
 const Article = require("../models/article");
+// fs module to get some functionality applied to any file.
+const FS = require("fs");
+const PATH = require("path");
 
 // Define the controller with its own different behaviours.
 const CONTROLLER = {
@@ -164,6 +171,156 @@ const CONTROLLER = {
         message: "Data is not valid!"
       });
     }
+  },
+
+  // Behaviour to delete any article.
+  delete: (request, response) => {
+    // Take the ID from the URL.
+    const ARTICLE_ID = request.params.id;
+    // Find and delete.
+    Article.findOneAndDelete({ _id: ARTICLE_ID }, (error, removedArticle) => {
+      // If there is any error...
+      if (error) {
+        return response.status(500).send({
+          status: "error",
+          message: "Error when deleting the article!"
+        });
+        // If there is not any article with that ID in the DB...
+      } else if (!removedArticle) {
+        return response.status(404).send({
+          status: "error",
+          message:
+            "The article has not been removed; maybe does not exist in the DB!"
+        });
+        // Return the a response just to see which article has been removed.
+      } else {
+        return response.status(200).send({
+          status: "success",
+          article: removedArticle
+        });
+      }
+    });
+  },
+
+  // Behaviour to upload files.
+  uploadImage: (request, response) => {
+    // Take the file from the request.
+    let file_name = "Image not uploaded";
+    // In case the request does not bring any image...
+    if (!request.files) {
+      return response.status(404).send({
+        status: "error",
+        message: file_name
+      });
+    }
+    // Get the name and extension from the file.
+    const FILE_PATH = request.files.file0.path;
+    const FILE_SPLIT = FILE_PATH.split("\\");
+    /**
+     * FOR LINUX AND MAC -> let file_split = file_path.split("/")
+     */
+    // The name:
+    file_name = FILE_SPLIT[2];
+    // The extension:
+    const EXTENSION_SPLIT = file_name.split(".");
+    const FILE_EXTENSION = EXTENSION_SPLIT[1];
+    // Check the extension (only images). If it is not valid, delete the file.
+    if (
+      FILE_EXTENSION !== "png" &&
+      FILE_EXTENSION !== "jpg" &&
+      FILE_EXTENSION !== "jpeg" &&
+      FILE_EXTENSION !== "gif"
+    ) {
+      // Delete the uploaded file.
+      FS.unlink(FILE_PATH, error => {
+        return response.status(500).send({
+          status: "error",
+          message: "The image extension is not valid!"
+        });
+      });
+      // If everything is valid...
+    } else {
+      // Take the article ID from the URL.
+      const ARTICLE_ID = request.params.id;
+      // Look for the article, assign the image to it and update it.
+      Article.findOneAndUpdate(
+        { _id: ARTICLE_ID },
+        { image: file_name },
+        { new: true },
+        (error, articleUpdated) => {
+          if (error || !articleUpdated) {
+            return response.status(500).send({
+              status: "error",
+              message: "Error when saving the image from the article!"
+            });
+          } else {
+            return response.status(200).send({
+              status: "success",
+              article: articleUpdated
+            });
+          }
+        }
+      );
+    }
+  },
+
+  // Behaviour to retrieve an image from the backend to the frontend.
+  getImage: (request, response) => {
+    // Take the file from the URL.
+    const FILE = request.params.image;
+    // Retrieve the path of the file.
+    const PATH_FILE = "./upload/articles/" + FILE;
+    // Check if the file exists.
+    FS.exists(PATH_FILE, exists => {
+      if (exists) {
+        return response.sendFile(PATH.resolve(PATH_FILE));
+      } else {
+        return response.status(404).send({
+          status: "error",
+          message: "The file does not exist!"
+        });
+      }
+    });
+  },
+
+  // Behaviour to search any article in the DB.
+  search: (request, response) => {
+    // Retrieve the string to find in the DB.
+    const SEARCH_STRING = request.params.search;
+    // Find it in the DB.
+    Article.find({
+      // MongoDB $or -> to be true whenever one of these conditions are true:
+      $or: [
+        // If SEARCH_STRING is contained in the title property ($options: "i" -> case insensitive).
+        { title: { $regex: SEARCH_STRING, $options: "i" } },
+        // If SEARCH_STRING is contained in the content property ($options: "i" -> case insensitive).
+        { content: { $regex: SEARCH_STRING, $options: "i" } }
+      ]
+    })
+      // Here we sort the results by the date and in a descending way.
+      .sort([["date", "descending"]])
+      // Execute the query.
+      .exec((error, articles) => {
+        // If there is any error...
+        if (error) {
+          return response.status(500).send({
+            status: "error",
+            message: "Error in the request"
+          });
+          // If there are not any articles containing that search...
+        } else if (!articles || articles.length <= 0) {
+          return response.status(404).send({
+            status: "error",
+            message: "There are no articles that match your search!"
+          });
+        } else {
+          // Return the article/s containing the search.
+          return response.status(200).send({
+            status: "success",
+            articles
+          });
+        }
+      });
   }
 };
 
