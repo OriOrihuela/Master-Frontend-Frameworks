@@ -18,6 +18,7 @@ const MIDDLEWARE_UPLOAD = MULTIPART({ uploadDir: "./upload/articles" });
  */
 ROUTER.get("/articles/:last?", ARTICLE_CONTROLLER.getArticles);
 ROUTER.get("/article/:id", ARTICLE_CONTROLLER.getArticle);
+ROUTER.get("/get-image/:image", ARTICLE_CONTROLLER.getImage);
 
 /**
  * POST routes.

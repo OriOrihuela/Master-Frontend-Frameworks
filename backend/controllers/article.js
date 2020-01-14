@@ -214,25 +214,25 @@ const CONTROLLER = {
       });
     }
     // Get the name and extension from the file.
-    let file_path = request.files.file0.path;
-    let file_split = file_path.split("\\");
+    const FILE_PATH = request.files.file0.path;
+    const FILE_SPLIT = FILE_PATH.split("\\");
     /**
      * FOR LINUX AND MAC -> let file_split = file_path.split("/")
      */
     // The name:
-    file_name = file_split[2];
+    file_name = FILE_SPLIT[2];
     // The extension:
-    let extension_split = file_name.split(".");
-    let file_extension = extension_split[1];
+    const EXTENSION_SPLIT = file_name.split(".");
+    const FILE_EXTENSION = EXTENSION_SPLIT[1];
     // Check the extension (only images). If it is not valid, delete the file.
     if (
-      file_extension !== "png" &&
-      file_extension !== "jpg" &&
-      file_extension !== "jpeg" &&
-      file_extension !== "gif"
+      FILE_EXTENSION !== "png" &&
+      FILE_EXTENSION !== "jpg" &&
+      FILE_EXTENSION !== "jpeg" &&
+      FILE_EXTENSION !== "gif"
     ) {
       // Delete the uploaded file.
-      FS.unlink(file_path, error => {
+      FS.unlink(FILE_PATH, error => {
         return response.status(500).send({
           status: "error",
           message: "The iamge extension is not valid!"
@@ -262,6 +262,25 @@ const CONTROLLER = {
         }
       );
     }
+  },
+
+  // Behaviour to retrieve an image from the backend to the frontend.
+  getImage: (request, response) => {
+    // Take the file from the URL.
+    const FILE = request.params.image;
+    // Retrieve the path of the file.
+    const PATH_FILE = "./upload/articles/" + FILE;
+    // Check if the file exists.
+    FS.exists(PATH_FILE, exists => {
+      if (exists) {
+        return response.sendFile(PATH.resolve(PATH_FILE));
+      } else {
+        return response.status(404).send({
+          status: "error",
+          message: "The file does not exist!"
+        });
+      }
+    });
   }
 };
 
