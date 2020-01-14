@@ -235,7 +235,7 @@ const CONTROLLER = {
       FS.unlink(FILE_PATH, error => {
         return response.status(500).send({
           status: "error",
-          message: "The iamge extension is not valid!"
+          message: "The image extension is not valid!"
         });
       });
       // If everything is valid...
@@ -281,6 +281,46 @@ const CONTROLLER = {
         });
       }
     });
+  },
+
+  // Behaviour to search any article in the DB.
+  search: (request, response) => {
+    // Retrieve the string to find in the DB.
+    const SEARCH_STRING = request.params.search;
+    // Find it in the DB.
+    Article.find({
+      // MongoDB $or -> to be true whenever one of these conditions are true:
+      $or: [
+        // If SEARCH_STRING is contained in the title property ($options: "i" -> case insensitive).
+        { title: { $regex: SEARCH_STRING, $options: "i" } },
+        // If SEARCH_STRING is contained in the content property ($options: "i" -> case insensitive).
+        { content: { $regex: SEARCH_STRING, $options: "i" } }
+      ]
+    })
+      // Here we sort the results by the date and in a descending way.
+      .sort([["date", "descending"]])
+      // Execute the query.
+      .exec((error, articles) => {
+        // If there is any error...
+        if (error) {
+          return response.status(500).send({
+            status: "error",
+            message: "Error in the request"
+          });
+          // If there are not any articles containing that search...
+        } else if (!articles || articles.length <= 0) {
+          return response.status(404).send({
+            status: "error",
+            message: "There are no articles that match your search!"
+          });
+        } else {
+          // Return the article/s containing the search.
+          return response.status(200).send({
+            status: "success",
+            articles
+          });
+        }
+      });
   }
 };
 
