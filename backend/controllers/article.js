@@ -164,6 +164,43 @@ const CONTROLLER = {
         message: "Data is not valid!"
       });
     }
+  },
+
+  // Behaviour to delete any article.
+  delete: (request, response) => {
+    // Take the ID from the URL.
+    const ARTICLE_ID = request.params.id;
+    // Find and delete.
+    Article.findOneAndDelete({ _id: ARTICLE_ID }, (error, removedArticle) => {
+      // If there is any error...
+      if (error) {
+        return response.status(500).send({
+          status: "error",
+          message: "Error when deleting the article!"
+        });
+        // If there is not any article with that ID in the DB...
+      } else if (!removedArticle) {
+        return response.status(404).send({
+          status: "error",
+          message:
+            "The article has not been removed; maybe does not exist in the DB!"
+        });
+        // Return the a response just to see which article has been removed.
+      } else {
+        return response.status(200).send({
+          status: "success",
+          article: removedArticle
+        });
+      }
+    });
+  },
+
+  // Behaviour to upload files.
+  upload: (request, response) => {
+    return response.status(200).send({
+      status: "success",
+      message: "caca"
+    });
   }
 };
 
