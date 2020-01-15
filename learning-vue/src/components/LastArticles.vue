@@ -19,8 +19,6 @@
           <!-- LIMPIAR FLOATS -->
           <div class="clearfix"></div>
         </article>
-
-        <!-- AÑADIR ARTÍCULOS VIA JS -->
       </div>
     </section>
   </div>
