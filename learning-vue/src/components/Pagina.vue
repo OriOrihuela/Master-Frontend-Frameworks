@@ -5,7 +5,28 @@
       <h3>{{id_desde_url}}</h3>
       <button @click="actualizarNombre()">Actualizar nombre</button>
       <button @click="redirigirAlBlog()">Redirigir al blog</button>
-      <h4>{{nombre}}</h4>
+
+      <!-- Testing reactivity (two-way data binding) -->
+      <h2>Reactividad</h2>
+      <input type="text" name="nombre" v-model="nombre" />
+      <h4>Mi nombre es: {{nombre}}</h4>
+
+      <!-- Conditional directives (v-if, v-else-if, v-else) -->
+      <h2>Directivas condicionales</h2>
+      <input type="number" name="number" v-model="edad" />
+      <h4>Mi edad es: {{edad}}</h4>
+      <p
+        style="color: green; font-weight: bold;"
+        v-if="edad && edad >= 18 && edad < 65"
+      >Hola mayor de edad</p>
+      <p style="color: purple; font-weight: bold;" v-else-if="edad && edad >= 65">Hola anciano</p>
+      <p style="color: red; font-weight: bold;" v-else>Hola menor de edad</p>
+
+      <!-- Iterative directive (v-for) -->
+      <h2>Directiva iterativa</h2>
+      <ul>
+        <li v-for="pelicula in peliculas" :key="pelicula">{{pelicula}}</li>
+      </ul>
     </section>
   </div>
 </template>
@@ -29,7 +50,9 @@ export default {
   data() {
     return {
       id_desde_url: null,
-      nombre: "Eduardo Orihuela"
+      nombre: "Eduardo Orihuela",
+      edad: 24,
+      peliculas: ["Batman vs Superman", "TLOTR", "Cacatúa Sónica"]
     };
   },
   methods: {
@@ -38,7 +61,7 @@ export default {
       console.log(this.nombre);
     },
     redirigirAlBlog() {
-      this.$router.push("/blog")
+      this.$router.push("/blog");
     }
   }
 };
