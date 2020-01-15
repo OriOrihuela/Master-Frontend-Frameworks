@@ -95,7 +95,8 @@ body {
   cursor: pointer;
 }
 
-#menu a:hover {
+#menu a:hover,
+#menu .active {
   color: rgba(30, 219, 20, 1);
 }
 

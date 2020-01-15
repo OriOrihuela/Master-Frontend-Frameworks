@@ -14,6 +14,7 @@ export const router = new VueRouter({
   mode: "history",
   routes: [
     { path: "/", component: LastArticles },
+    { path: "/home", component: LastArticles },
     { path: "/blog", component: Blog },
     { path: "/formulario", component: Formulario },
     // Redirection to component with optional parameter.

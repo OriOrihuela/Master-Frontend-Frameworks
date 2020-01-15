@@ -4,6 +4,7 @@
       <h2 class="subheader">Página de pruebas</h2>
       <h3>{{id_desde_url}}</h3>
       <button @click="actualizarNombre()">Actualizar nombre</button>
+      <button @click="redirigirAlBlog()">Redirigir al blog</button>
       <h4>{{nombre}}</h4>
     </section>
   </div>
@@ -35,6 +36,9 @@ export default {
     actualizarNombre() {
       this.nombre = "EDUARDO ORIHUELA";
       console.log(this.nombre);
+    },
+    redirigirAlBlog() {
+      this.$router.push("/blog")
     }
   }
 };
