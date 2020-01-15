@@ -3,7 +3,7 @@
     <Header></Header>
     <Slider></Slider>
     <div class="center">
-      <LastArticles></LastArticles>
+      <router-view></router-view>
       <Sidebar></Sidebar>
       <!-- LIMPIAR FLOATS -->
       <div class="clearfix"></div>
@@ -16,7 +16,6 @@
 import Header from "./components/Header";
 import Slider from "./components/Slider";
 import Sidebar from "./components/Sidebar";
-import LastArticles from "./components/LastArticles";
 import Footer from "./components/Footer";
 
 export default {
@@ -25,7 +24,6 @@ export default {
     Header,
     Slider,
     Sidebar,
-    LastArticles,
     Footer
   }
 };
