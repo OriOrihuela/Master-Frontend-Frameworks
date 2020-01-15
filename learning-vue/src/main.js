@@ -5,6 +5,7 @@ import LastArticles from "./components/LastArticles";
 import Blog from "./components/Blog";
 import Formulario from "./components/Formulario";
 import Pagina from "./components/Pagina";
+import ErrorComponent from './components/ErrorComponent';
 
 Vue.use(VueRouter);
 
@@ -13,10 +14,12 @@ export const router = new VueRouter({
   mode: "history",
   routes: [
     { path: "/", component: LastArticles },
-    { path: "/home", component: LastArticles },
     { path: "/blog", component: Blog },
     { path: "/formulario", component: Formulario },
+    // Redirection to component with optional parameter.
     { path: "/pagina/:id?", name: "pagina", component: Pagina },
+    // Error or 404 page.
+    { path: "*", component: ErrorComponent }
   ]
 });
 

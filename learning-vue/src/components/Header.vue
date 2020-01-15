@@ -14,7 +14,7 @@
         <nav id="menu">
           <ul>
             <li>
-              <router-link to="/home">Inicio</router-link>
+              <router-link to="/">Inicio</router-link>
             </li>
             <li>
               <router-link to="/blog">Blog</router-link>
