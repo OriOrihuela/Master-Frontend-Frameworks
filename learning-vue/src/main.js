@@ -14,10 +14,9 @@ export const router = new VueRouter({
   routes: [
     { path: "/", component: LastArticles },
     { path: "/home", component: LastArticles },
-    { path: "/ultimos-articulos", component: LastArticles },
     { path: "/blog", component: Blog },
     { path: "/formulario", component: Formulario },
-    { path: "/pagina", component: Pagina },
+    { path: "/pagina/:id?", name: "pagina", component: Pagina },
   ]
 });
 
