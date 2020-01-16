@@ -1,4 +1,11 @@
 import Vue from "vue";
+
+// vue-moment and moment imports.
+import VueMoment from "vue-moment";
+import moment from "moment";
+import "moment/locale/es";
+
+// Custom components.
 import App from "./App.vue";
 import VueRouter from "vue-router";
 import LastArticles from "./components/LastArticles";
@@ -7,10 +14,18 @@ import Formulario from "./components/Formulario";
 import Pagina from "./components/Pagina";
 import ErrorComponent from "./components/ErrorComponent";
 import Peliculas from "./components/Peliculas";
+
+// Forms validator.
 import Vuelidate from "vuelidate";
 
+// Router and forms validator.
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
+
+// Vue-moment and moment modules to use on dates.
+Vue.use(VueMoment, {
+  moment
+});
 
 export const router = new VueRouter({
   base: "/",

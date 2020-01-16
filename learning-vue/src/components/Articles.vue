@@ -7,7 +7,7 @@
           <img src="../assets/logo.png" :alt="article.title" v-else />
         </div>
         <h2>{{article.title}}</h2>
-        <span class="date">{{article.date}}</span>
+        <span class="date">{{article.date | moment("from", "now")}}</span>
         <a href="#">Leer más</a>
         <!-- LIMPIAR FLOATS -->
         <div class="clearfix"></div>
