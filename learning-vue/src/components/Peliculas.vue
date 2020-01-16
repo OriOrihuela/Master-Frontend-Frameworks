@@ -1,34 +1,32 @@
 <template>
   <div>
-    <section id="content">
-      <h2 class="subheader">Películas</h2>
-      <!-- LISTADO PELÍCULAS -->
-      <div id="articles">
-        <article class="article-item" v-for="pelicula in peliculas" :key="pelicula">
-          <div class="image-wrap">
-            <img :src="pelicula.image" :alt="pelicula.title" :title="pelicula.title" />
+    <div class="center">
+      <section id="content">
+        <h2 class="subheader">Películas</h2>
+        <!-- LISTADO PELÍCULAS -->
+        <div id="articles">
+          <div v-for="pelicula in peliculas" :key="pelicula">
+            <Pelicula :pelicula="pelicula"></Pelicula>
           </div>
-          <h2>{{pelicula.title}}</h2>
-          <span
-            class="date"
-            :class="{
-              yeargreen: pelicula.year >= 2015,
-              yearred: pelicula.year < 2015
-          }"
-          >{{pelicula.year}}</span>
-          <a href="#">Leer más</a>
-
-          <!-- LIMPIAR FLOATS -->
-          <div class="clearfix"></div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </section>
+      <Sidebar></Sidebar>
+      <!-- LIMPIAR FLOATS -->
+      <div class="clearfix"></div>
+    </div>
   </div>
 </template>
 
 <script>
+import Pelicula from "./Pelicula";
+import Sidebar from "./Sidebar";
+
 export default {
   name: "Peliculas",
+  components: {
+    Sidebar,
+    Pelicula
+  },
   data() {
     return {
       peliculas: [
