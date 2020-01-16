@@ -3,13 +3,16 @@
     <div class="center">
       <section id="content">
         <h1 class="subheader">Películas</h1>
+        <div class="mis-datos" v-if="misDatos">
+          <span v-html="misDatos"></span>
+        </div>
         <div class="favorita" v-if="favorita">
           <p>La película marcada es:</p>
           <h2>{{favorita.title}}</h2>
         </div>
         <!-- LISTADO PELÍCULAS -->
         <div id="articles">
-          <div v-for="pelicula in peliculas" :key="pelicula">
+          <div v-for="pelicula in peliculasMayuscula" :key="pelicula">
             <Pelicula :pelicula="pelicula" @favorita="recibirFavorita"></Pelicula>
           </div>
         </div>
@@ -33,6 +36,8 @@ export default {
   },
   data() {
     return {
+      nombre: "Eduardo",
+      apellidos: "Orihuela Verdugo",
       peliculas: [
         {
           title: "Batman vs Superman",
@@ -59,6 +64,19 @@ export default {
   methods: {
     recibirFavorita(favorita) {
       this.favorita = favorita;
+    }
+  },
+  // Computed properties
+  computed: {
+    peliculasMayuscula() {
+      let peliculasMod = this.peliculas;
+      for (let index = 0; index < peliculasMod.length; index++) {
+        peliculasMod[index].title = peliculasMod[index].title.toUpperCase();
+      }
+      return peliculasMod;
+    },
+    misDatos() {
+      return this.nombre + " " + this.apellidos + ".";
     }
   }
 };
