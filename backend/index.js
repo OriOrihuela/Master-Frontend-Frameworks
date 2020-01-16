@@ -3,7 +3,7 @@
 // Import some Node modules.
 const MONGOOSE = require("mongoose");
 const APP = require("./app");
-const PORT = 3900;
+const PORT = process.env.PORT || 3900;
 
 // Deactivating old and deprecated behaviours.
 MONGOOSE.set("useFindAndModify", false);

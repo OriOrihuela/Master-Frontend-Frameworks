@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       url: GLOBAL.url,
-      articles: []
+      articles: null
     };
   },
   // Own methods.
