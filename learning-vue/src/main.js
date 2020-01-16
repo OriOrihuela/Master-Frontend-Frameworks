@@ -5,10 +5,12 @@ import LastArticles from "./components/LastArticles";
 import Blog from "./components/Blog";
 import Formulario from "./components/Formulario";
 import Pagina from "./components/Pagina";
-import ErrorComponent from './components/ErrorComponent';
-import Peliculas from './components/Peliculas';
+import ErrorComponent from "./components/ErrorComponent";
+import Peliculas from "./components/Peliculas";
+import Vuelidate from "vuelidate";
 
 Vue.use(VueRouter);
+Vue.use(Vuelidate);
 
 export const router = new VueRouter({
   base: "/",
