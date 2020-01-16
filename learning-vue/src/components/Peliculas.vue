@@ -2,11 +2,15 @@
   <div>
     <div class="center">
       <section id="content">
-        <h2 class="subheader">Películas</h2>
+        <h1 class="subheader">Películas</h1>
+        <div class="favorita" v-if="favorita">
+          <p>La película marcada es:</p>
+          <h2>{{favorita.title}}</h2>
+        </div>
         <!-- LISTADO PELÍCULAS -->
         <div id="articles">
           <div v-for="pelicula in peliculas" :key="pelicula">
-            <Pelicula :pelicula="pelicula"></Pelicula>
+            <Pelicula :pelicula="pelicula" @favorita="recibirFavorita"></Pelicula>
           </div>
         </div>
       </section>
@@ -48,8 +52,14 @@ export default {
           image:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0gOGi-dQQ5xaBpdS0a8YyMrnMUslwsFTtq4QDJ4REyPLRp64DjQ&s"
         }
-      ]
+      ],
+      favorita: null
     };
+  },
+  methods: {
+    recibirFavorita(favorita) {
+      this.favorita = favorita;
+    }
   }
 };
 </script>

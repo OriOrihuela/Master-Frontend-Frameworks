@@ -4,7 +4,7 @@
       <div class="image-wrap">
         <img :src="pelicula.image" :alt="pelicula.title" :title="pelicula.title" />
       </div>
-      <h2>{{pelicula.title}}</h2>
+      <h3>{{pelicula.title}}</h3>
       <span
         class="date"
         :class="{
@@ -13,6 +13,8 @@
           }"
       >{{pelicula.year}}</span>
       <a href="#">Leer más</a>
+
+      <input type="button" value="Marcar como favorita" @click="pasarFavoritaAlPadre(pelicula)" />
 
       <!-- LIMPIAR FLOATS -->
       <div class="clearfix"></div>
@@ -23,11 +25,11 @@
 <script>
 export default {
   name: "Pelicula",
-  props: [
-      "pelicula"
-  ],
-  mounted() {
-      console.log(this.pelicula)
+  props: ["pelicula"],
+  methods: {
+    pasarFavoritaAlPadre(pelicula) {
+      this.$emit("favorita", pelicula);
+    }
   }
 };
 </script>
