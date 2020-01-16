@@ -3,9 +3,10 @@
     <div class="center">
       <section id="content">
         <h1 class="subheader">Películas</h1>
-        <div class="mis-datos" v-if="misDatos">
-          <span v-html="misDatos"></span>
-        </div>
+        <div
+          class="mis-datos"
+          v-if="misDatos"
+        >{{misDatos | mayusculas | concatenateYear("Este es el mejor año")}}</div>
         <div class="favorita" v-if="favorita">
           <p>La película marcada es:</p>
           <h2>{{favorita.title}}</h2>
@@ -61,6 +62,7 @@ export default {
       favorita: null
     };
   },
+  // Own methods of the component.
   methods: {
     recibirFavorita(favorita) {
       this.favorita = favorita;
@@ -76,7 +78,17 @@ export default {
       return peliculasMod;
     },
     misDatos() {
-      return this.nombre + " " + this.apellidos + ".";
+      return this.nombre + " " + this.apellidos;
+    }
+  },
+  // Using filters.
+  filters: {
+    mayusculas(value) {
+      return value.toUpperCase();
+    },
+    concatenateYear(value, message) {
+      const DATE = new Date();
+      return value + " " + DATE.getFullYear() + " " + message;
     }
   }
 };
