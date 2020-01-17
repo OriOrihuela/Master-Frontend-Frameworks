@@ -5,15 +5,19 @@ import VueMoment from "vue-moment";
 import moment from "moment";
 import "moment/locale/es";
 
+// vue-router
+import VueRouter from "vue-router";
+
 // Custom components.
 import App from "./App.vue";
-import VueRouter from "vue-router";
 import LastArticles from "./components/LastArticles";
 import Blog from "./components/Blog";
 import Formulario from "./components/Formulario";
 import Pagina from "./components/Pagina";
 import ErrorComponent from "./components/ErrorComponent";
 import Peliculas from "./components/Peliculas";
+import Search from "./components/Search";
+import Redirect from "./components/Redirect";
 
 // Forms validator.
 import Vuelidate from "vuelidate";
@@ -34,6 +38,8 @@ export const router = new VueRouter({
     { path: "/", component: LastArticles },
     { path: "/home", component: LastArticles },
     { path: "/blog", component: Blog },
+    { path: "/buscador/:searchString", component: Search },
+    { path: "/redirect/:searchString", component: Redirect },
     { path: "/formulario", component: Formulario },
     { path: "/peliculas", name: "peliculas", component: Peliculas },
     // Redirection to component with optional parameter.
