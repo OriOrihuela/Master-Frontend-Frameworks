@@ -296,6 +296,7 @@ body {
 }
 
 input[type="text"],
+input[type="file"],
 textarea {
   width: 100%;
   min-height: 30px;
@@ -306,6 +307,7 @@ textarea {
 }
 
 input[type="text"]:focus,
+input[type="file"]:focus,
 textarea:focus {
   box-shadow: 0 0 2px #ccc inset;
 }
