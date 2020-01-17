@@ -6,7 +6,9 @@
           <img :src="url + 'get-image/' + article.image" :alt="article.title" v-if="article.image" />
           <img src="../assets/logo.png" :alt="article.title" v-else />
         </div>
-        <h2>{{article.title}}</h2>
+        <h2>
+          <router-link :to="{name: 'article', params: {id: article._id}}">{{article.title}}</router-link>
+        </h2>
         <span class="date">{{article.date | moment("from", "now")}}</span>
         <a href="#">Leer más</a>
         <!-- LIMPIAR FLOATS -->

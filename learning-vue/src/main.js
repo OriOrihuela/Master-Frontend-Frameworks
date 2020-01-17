@@ -18,6 +18,7 @@ import ErrorComponent from "./components/ErrorComponent";
 import Peliculas from "./components/Peliculas";
 import Search from "./components/Search";
 import Redirect from "./components/Redirect";
+import Article from "./components/Article";
 
 // Forms validator.
 import Vuelidate from "vuelidate";
@@ -38,10 +39,12 @@ export const router = new VueRouter({
     { path: "/", component: LastArticles },
     { path: "/home", component: LastArticles },
     { path: "/blog", component: Blog },
-    { path: "/buscador/:searchString", component: Search },
-    { path: "/redirect/:searchString", component: Redirect },
     { path: "/formulario", component: Formulario },
     { path: "/peliculas", name: "peliculas", component: Peliculas },
+    { path: "/articulo/:id", name: "article", component: Article },
+    // Whenever the user wnats to search something using the sidebar form...
+    { path: "/buscador/:searchString", component: Search },
+    { path: "/redirect/:searchString", component: Redirect },
     // Redirection to component with optional parameter.
     { path: "/pagina/:id?", name: "pagina", component: Pagina },
     // Error or 404 page.
