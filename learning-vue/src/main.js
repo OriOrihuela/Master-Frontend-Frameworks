@@ -20,6 +20,7 @@ import Search from "./components/Search";
 import Redirect from "./components/Redirect";
 import Article from "./components/Article";
 import CreateArticle from "./components/CreateArticle";
+import EditArticle from "./components/EditArticle";
 
 // Forms validator.
 import Vuelidate from "vuelidate";
@@ -47,7 +48,7 @@ export const router = new VueRouter({
 
     // Redirection with params.
     { path: "/articulo/:id", name: "article", component: Article },
-    // Whenever the user wants to search an article using the sidebar form...
+    { path: "/editar/:id", name: "edit", component: EditArticle },
     { path: "/buscador/:searchString", component: Search },
     { path: "/redirect/:searchString", component: Redirect },
 

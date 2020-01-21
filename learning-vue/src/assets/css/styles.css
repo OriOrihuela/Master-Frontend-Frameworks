@@ -277,6 +277,18 @@ body {
   background-color: green;
 }
 
+.btn-warning {
+  background-color: orange;
+  color: white !important;
+  text-align: center;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white !important;
+  text-align: center;
+}
+
 .btn-success:hover {
   background-color: black;
 }
