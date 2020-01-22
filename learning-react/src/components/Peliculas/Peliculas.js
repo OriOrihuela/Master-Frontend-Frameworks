@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Pelicula from "../Pelicula/Pelicula";
 
 export default class Peliculas extends Component {
   /**
@@ -34,18 +35,7 @@ export default class Peliculas extends Component {
         {/* CREATE FILM COMPONENT */}
         <div id="articles" className="peliculas">
           {this.state.peliculas.map((pelicula, index) => {
-            return (
-              <article id="article-template" class="article-item">
-                <div class="image-wrap">
-                  <img src={pelicula.image} alt={pelicula.titulo} />
-                </div>
-                <h2>{pelicula.titulo}</h2>
-                <span class="date">Hace 5 minutos</span>
-                <a href="#">Leer más</a>
-                {/* LIMPIAR FLOATS */}
-                <div class="clearfix"></div>
-              </article>
-            );
+            return <Pelicula key={index} pelicula={pelicula}></Pelicula>;
           })}
         </div>
       </div>
