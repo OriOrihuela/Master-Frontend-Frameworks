@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./assets/images/logo.svg";
 import "./assets/css/App.css";
 
 // Components Imports.
@@ -7,7 +6,7 @@ import Header from "./components/Header/Header";
 import Slider from "./components/Slider/Slider";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Footer from "./components/Footer/Footer";
-import SeccionPruebas from "./components/SeccionPruebas/SeccionPruebas";
+import Peliculas from "./components/Peliculas/Peliculas";
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
       <Header></Header>
       <Slider></Slider>
       <div class="center">
-        <SeccionPruebas></SeccionPruebas>
+        <Peliculas></Peliculas>
         <Sidebar></Sidebar>
       </div>
       <Footer></Footer>
