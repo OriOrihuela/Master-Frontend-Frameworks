@@ -3,30 +3,22 @@ import logo from "./assets/images/logo.svg";
 import "./assets/css/App.css";
 
 // Components Imports.
-import MiComponente from "./components/MiComponente/MiComponente";
-import Peliculas from "./components/Peliculas/Peliculas";
+import Header from "./components/Header/Header";
+import Slider from "./components/Slider/Slider";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Footer from "./components/Footer/Footer";
+import SeccionPruebas from "./components/SeccionPruebas/SeccionPruebas";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <section className="componentes">
-          <MiComponente></MiComponente>
-          <Peliculas></Peliculas>
-        </section>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <Slider></Slider>
+      <div class="center">
+        <SeccionPruebas></SeccionPruebas>
+        <Sidebar></Sidebar>
+      </div>
+      <Footer></Footer>
     </div>
   );
 }
