@@ -18,12 +18,13 @@ export default class Peliculas extends Component {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--DQBBY_3MqtNHYlJOe3C3jPK4mM3UrZM-PfpNYSh9ml5pCS5&s"
       },
       {
-        title: "El señor de los anillos",
+        titulo: "El señor de los anillos",
         image:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0gOGi-dQQ5xaBpdS0a8YyMrnMUslwsFTtq4QDJ4REyPLRp64DjQ&s"
       }
     ],
-    nombre: "Eduardo Orihuela Verdugo"
+    nombre: "Eduardo Orihuela Verdugo",
+    favorita: {}
   };
 
   // Render method.
@@ -32,13 +33,45 @@ export default class Peliculas extends Component {
       <div id="content" className="peliculas">
         <h2 className="subheader">Peliculas</h2>
         <p>Selección de las películas favoritas de {this.state.nombre}</p>
+        <button className="btn" onClick={this.changeTitle}>
+          Cambiar título de Batman
+        </button>
+        {this.state.favorita.titulo && (
+          <p className="favorita">
+            <strong>La pelicula favorita es: </strong>
+            <span>{this.state.favorita.titulo}</span>
+          </p>
+        )}
         {/* CREATE FILM COMPONENT */}
         <div id="articles" className="peliculas">
           {this.state.peliculas.map((pelicula, index) => {
-            return <Pelicula key={index} pelicula={pelicula}></Pelicula>;
+            return (
+              <Pelicula
+                key={index}
+                pelicula={pelicula}
+                marcarFavorita={this.favorita}
+              ></Pelicula>
+            );
           })}
         </div>
       </div>
     );
   }
+
+  /**
+   * METHODS
+   */
+  changeTitle = () => {
+    let { peliculas } = this.state;
+    peliculas[0].titulo = "Batman Begins";
+    this.setState({
+      peliculas: peliculas
+    });
+  };
+
+  favorita = pelicula => {
+    this.setState({
+      favorita: pelicula
+    });
+  };
 }

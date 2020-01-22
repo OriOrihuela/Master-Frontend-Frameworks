@@ -7,9 +7,9 @@ export default class Sidebar extends Component {
         <aside id="sidebar">
           <div id="search" className="sidebar-item">
             <h3>Puedes hacer esto</h3>
-            <a href="#" className="btn btn-success">
+            {/* <a href="#" className="btn btn-success">
               Crear artículo
-            </a>
+            </a> */}
           </div>
           <div id="search" className="sidebar-item">
             <h3>Buscador</h3>

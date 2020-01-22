@@ -4,9 +4,9 @@ const Footer = () => {
   return (
     <div>
       {/* CLEAN FLOATS */}
-      <div class="clearfix"></div>
+      <div className="clearfix"></div>
       <footer id="footer">
-        <div class="center">
+        <div className="center">
           <p>&copy; Máster en Frameworks para Javascript</p>
         </div>
       </footer>
