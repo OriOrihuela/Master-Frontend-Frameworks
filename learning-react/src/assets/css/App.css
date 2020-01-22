@@ -17,7 +17,7 @@ body {
   width: 100%;
   background-color: white;
   border-bottom: 1px solid #ccc;
-  border-top: 5px solid rgba(30, 219, 20, 1);
+  border-top: 5px solid #61dafb;
 }
 
 .center {
@@ -38,25 +38,16 @@ body {
   float: left;
   height: 60px;
   margin-top: -9px;
-  margin-right: 10px;
-  animation: latir infinite 1s linear;
+  margin-right: -10px;
+  animation: girar infinite 30s linear;
 }
 
-@keyframes latir {
-  0% {
-    transform: scale(1, 1);
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
   }
-
-  50% {
-    transform: scale(1.02, 1.02);
-  }
-
-  55% {
-    transform: scale(0.95, 0.95);
-  }
-
-  100% {
-    transform: scale(1, 1);
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -95,25 +86,8 @@ body {
   cursor: pointer;
 }
 
-#menu a:hover,
-#menu .active {
-  color: rgba(30, 219, 20, 1);
-}
-
-.yeargreen {
-  background-color: green !important;
-  color: white !important;
-  padding: 10px !important;
-  width: 111px !important;
-  text-align: center !important;
-}
-
-.yearred {
-  background-color: red !important;
-  color: white !important;
-  padding: 10px !important;
-  width: 111px !important;
-  text-align: center !important;
+#menu a:hover {
+  color: #61dafb;
 }
 
 /* ---- CLEARFIX ---- */
@@ -128,60 +102,12 @@ body {
   height: 350px;
   color: white;
   text-shadow: 0px 0px 5px #444;
-
-  /* ---- DEGRADADO CSS ---- */
-  background: rgba(30, 219, 20, 1);
-  background: -moz-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(30, 219, 20, 1) 0%,
-    rgba(30, 219, 20, 1) 15%,
-    rgba(70, 140, 70, 1) 96%,
-    rgba(70, 140, 70, 1) 100%
-  );
-  background: -webkit-gradient(
-    radial,
-    center center,
-    0px,
-    center center,
-    100%,
-    color-stop(0%, rgba(30, 219, 20, 1)),
-    color-stop(15%, rgba(30, 219, 20, 1)),
-    color-stop(96%, rgba(70, 140, 70, 1)),
-    color-stop(100%, rgba(70, 140, 70, 1))
-  );
-  background: -webkit-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(30, 219, 20, 1) 0%,
-    rgba(30, 219, 20, 1) 15%,
-    rgba(70, 140, 70, 1) 96%,
-    rgba(70, 140, 70, 1) 100%
-  );
-  background: -o-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(30, 219, 20, 1) 0%,
-    rgba(30, 219, 20, 1) 15%,
-    rgba(70, 140, 70, 1) 96%,
-    rgba(70, 140, 70, 1) 100%
-  );
-  background: -ms-radial-gradient(
-    center,
-    ellipse cover,
-    rgba(30, 219, 20, 1) 0%,
-    rgba(30, 219, 20, 1) 15%,
-    rgba(70, 140, 70, 1) 96%,
-    rgba(70, 140, 70, 1) 100%
-  );
+  background: rgb(125, 230, 250);
   background: radial-gradient(
-    ellipse at center,
-    rgba(30, 219, 20, 1) 0%,
-    rgba(30, 219, 20, 1) 15%,
-    rgba(70, 140, 70, 1) 96%,
-    rgba(70, 140, 70, 1) 100%
+    circle,
+    rgba(125, 230, 250, 1) 16%,
+    rgba(106, 183, 209, 1) 100%
   );
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1edb14', endColorstr='#468c46', GradientType=1 );
 }
 
 #slider h1 {
@@ -277,18 +203,6 @@ body {
   background-color: green;
 }
 
-.btn-warning {
-  background-color: orange;
-  color: white !important;
-  text-align: center;
-}
-
-.btn-danger {
-  background-color: red;
-  color: white !important;
-  text-align: center;
-}
-
 .btn-success:hover {
   background-color: black;
 }
@@ -308,7 +222,6 @@ body {
 }
 
 input[type="text"],
-input[type="file"],
 textarea {
   width: 100%;
   min-height: 30px;
@@ -319,7 +232,6 @@ textarea {
 }
 
 input[type="text"]:focus,
-input[type="file"]:focus,
 textarea:focus {
   box-shadow: 0 0 2px #ccc inset;
 }
@@ -439,19 +351,10 @@ textarea {
   }
 }
 
-@media (max-width: 909px) {
-  #logo {
-    width: 265px;
-  }
-
-  #menu {
-    width: auto;
-  }
-}
-
 @media (max-width: 826px) {
   #logo {
     float: none;
+    width: 240px;
     margin: 0 auto;
     margin-top: 20px;
   }
