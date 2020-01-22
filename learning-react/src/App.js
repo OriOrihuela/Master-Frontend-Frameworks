@@ -2,8 +2,9 @@ import React from "react";
 import logo from "./assets/images/logo.svg";
 import "./assets/css/App.css";
 
-// Import Components
+// Components Imports.
 import MiComponente from "./components/MiComponente/MiComponente";
+import Peliculas from "./components/Peliculas/Peliculas";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         </p>
         <section className="componentes">
           <MiComponente></MiComponente>
+          <Peliculas></Peliculas>
         </section>
         <a
           className="App-link"
