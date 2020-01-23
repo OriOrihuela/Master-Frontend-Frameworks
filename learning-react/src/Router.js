@@ -4,6 +4,9 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // CUSTOM COMPONENTS
+import Home from "./components/Home/Home";
+import Blog from "./components/Blog/Blog";
+import Formulario from "./components/Formulario/Formulario";
 import Peliculas from "./components/Peliculas/Peliculas";
 import Error from "./components/Error/Error";
 
@@ -13,18 +16,27 @@ export default class Router extends Component {
       <div>
         {/* CONFIGURE ROUTES AND PAGES */}
         <Switch>
-          <Route exact path="/" component={Peliculas}></Route>
-          <Route exact path="/home" component={Peliculas}></Route>
-          <Route exact path="/ruta-prueba" component={Peliculas}></Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/home" component={Home}></Route>
+          <Route exact path="/blog" component={Blog}></Route>
+          <Route exact path="/formulario" component={Formulario}></Route>
+          <Route exact path="/peliculas" component={Peliculas}></Route>
 
-          {/* ROUTES WITH CUSTOM RENDER*/}
+          {/* 404 NOT FOUND */}
+          <Route component={Error}></Route>
+
+          {/**
+           * TEST ROUTING
+           */}
+
+          {/* ROUTES WITH CUSTOM RENDER */}
           <Route
             exact
             path="/pagina-1"
             render={() => <h1>Hola mundo desde la página 1</h1>}
           ></Route>
 
-          {/* ROUTES WITH PARAMS*/}
+          {/* ROUTES WITH PARAMS */}
           <Route
             exact
             path="/pruebas/:nombre/:apellidos?"
@@ -46,9 +58,6 @@ export default class Router extends Component {
               );
             }}
           ></Route>
-
-          {/* 404 NOT FOUND */}
-          <Route component={Error}></Route>
         </Switch>
       </div>
     );
