@@ -36,11 +36,13 @@ export default class Peliculas extends Component {
         <button className="btn" onClick={this.changeTitle}>
           Cambiar título de Batman
         </button>
-        {this.state.favorita.titulo && (
+        {this.state.favorita.titulo ? (
           <p className="favorita">
             <strong>La pelicula favorita es: </strong>
             <span>{this.state.favorita.titulo}</span>
           </p>
+        ) : (
+          <p>No hay película favorita</p>
         )}
         {/* CREATE FILM COMPONENT */}
         <div id="articles" className="peliculas">
