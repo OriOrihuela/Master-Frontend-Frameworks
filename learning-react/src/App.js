@@ -3,21 +3,22 @@ import "./assets/css/App.css";
 
 // Components Imports.
 import Header from "./components/Header/Header";
-import Slider from "./components/Slider/Slider";
-import Sidebar from "./components/Sidebar/Sidebar";
 import Footer from "./components/Footer/Footer";
-import Peliculas from "./components/Peliculas/Peliculas";
+
+// Routes.
+import Router from "./Router";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-      <Slider></Slider>
-      <div className="center">
-        <Peliculas></Peliculas>
-        <Sidebar></Sidebar>
-      </div>
-      <Footer></Footer>
+      <BrowserRouter>
+        <Header></Header>
+        <section>
+          <Router></Router>
+        </section>
+        <Footer></Footer>
+      </BrowserRouter>
     </div>
   );
 }
