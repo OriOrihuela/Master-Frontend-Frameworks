@@ -1,0 +1,7 @@
+.buttons {
+  display: flex;
+}
+
+.buttons :nth-child(1) {
+  margin-right: 15px;
+}
