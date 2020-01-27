@@ -3,6 +3,9 @@ import axios from "axios";
 import GLOBAL from "../../Global";
 import ReactImage from "../../assets/images/logo.svg";
 
+// Routing.
+import { Link } from "react-router-dom";
+
 // Date format.
 import Moment from "react-moment";
 import "moment/locale/es";
@@ -36,10 +39,11 @@ export default class Articles extends Component {
             </div>
             <h2>{article.title}</h2>
             <span class="date">
-              <Moment locale="es" fromNow>{article.date}</Moment>
+              <Moment locale="es" fromNow>
+                {article.date}
+              </Moment>
             </span>
-            <a href="#">Leer más</a>
-
+            <Link to={"/blog/articulo/" + article._id}>Leer más</Link>
             {/* CLEAN FLOATS */}
             <div class="clearfix"></div>
           </article>
@@ -72,8 +76,26 @@ export default class Articles extends Component {
 
   // Whenever the component is mounted...
   componentDidMount() {
-    this.getArticles();
+    let home = this.props.home;
+    let search = this.props.search;
+    if (home === "true") {
+      this.getLastArticles();
+    } else if (search && search !== null && search !== undefined) {
+      this.getArticlesBySearch(search);
+    } else {
+      this.getArticles();
+    }
   }
+
+  // Method to retrieve all the last 5 articles from the DB.
+  getLastArticles = () => {
+    axios.get(this.url + "articles/true").then(response => {
+      this.setState({
+        articles: response.data.articles,
+        status: "success"
+      });
+    });
+  };
 
   // Method to retrieve all the articles from the DB.
   getArticles = () => {
@@ -83,5 +105,23 @@ export default class Articles extends Component {
         status: "success"
       });
     });
+  };
+
+  // Method to retrieve all the articles from the DB.
+  getArticlesBySearch = searched => {
+    axios
+      .get(this.url + "search/" + searched)
+      .then(response => {
+        this.setState({
+          articles: response.data.articles,
+          status: "success"
+        });
+      })
+      .catch(error => {
+        this.setState({
+          articles: [],
+          status: "success"
+        });
+      });
   };
 }
