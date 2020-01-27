@@ -8,9 +8,9 @@ export default class Sidebar extends Component {
           {this.props.blog === "true" && (
             <div id="search" className="sidebar-item">
               <h3>Puedes hacer esto</h3>
-              <a href="#" className="btn btn-success">
+              {/* <a href="#" className="btn btn-success">
                 Crear artículo
-              </a>
+              </a> */}
             </div>
           )}
           <div id="search" className="sidebar-item">
