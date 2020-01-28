@@ -1,9 +1,20 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
-import GLOBAL from "../../Global";
 import Sidebar from "../Sidebar/Sidebar";
+
+// Importing the Back-end API url.
+import GLOBAL from "../../Global";
+
+// Axios library to make HTTP requests.
+import axios from "axios";
+
+// Custom CSS.
 import "../CreateArticle/CreateArticle.css";
+
+// Validator of React.
+import SimpleReactValidator from "simple-react-validator";
+
+// Redirecting import.
+import { Redirect } from "react-router-dom";
 
 export default class CreateArticle extends Component {
   /**
@@ -13,6 +24,14 @@ export default class CreateArticle extends Component {
 
   titleRef = React.createRef();
   contentRef = React.createRef();
+
+  validator = new SimpleReactValidator();
+
+  // validator = new SimpleReactValidator({
+  //   messages: {
+  //     required: "CUSTOM MESSAGE"
+  //   }
+  // });
 
   state = {
     article: {},
@@ -29,7 +48,7 @@ export default class CreateArticle extends Component {
       <div className="center">
         <section id="content">
           <h1 className="subheader">Crear artículo</h1>
-          <form className="mid-form" onSubmit={this.saveArticle}>
+          <form className="mid-form" onSubmit={this.saveData}>
             <div className="form-group">
               <label htmlFor="title">Título</label>
               <input
@@ -38,6 +57,11 @@ export default class CreateArticle extends Component {
                 ref={this.titleRef}
                 onChange={this.changeState}
               ></input>
+              {this.validator.message(
+                "title",
+                this.state.article.title,
+                "required|alpha"
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="content">Contenido</label>
@@ -47,6 +71,11 @@ export default class CreateArticle extends Component {
                 ref={this.contentRef}
                 onChange={this.changeState}
               ></textarea>
+              {this.validator.message(
+                "content",
+                this.state.article.content,
+                "required"
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="file0">Imagen</label>
@@ -69,10 +98,23 @@ export default class CreateArticle extends Component {
   }
 
   // Method to save an article in the DB.
-  saveArticle = event => {
+  saveData = event => {
     event.preventDefault();
     // Fill the state with the form values.
     this.changeState();
+    // Checking if the form validation is correct.
+    if (this.validator.allValid()) {
+      this.saveArticle();
+    } else {
+      this.validator.showMessages();
+      this.forceUpdate();
+      this.setState({
+        status: "failed"
+      });
+    }
+  };
+
+  saveArticle = () => {
     // Make an HTTP request to save the article in the DB.
     axios.post(this.url + "save", this.state.article).then(response => {
       if (response.data.article) {
@@ -133,6 +175,8 @@ export default class CreateArticle extends Component {
         content: this.contentRef.current.value
       }
     });
+    this.validator.showMessages();
+    this.forceUpdate();
   };
 
   // Method to

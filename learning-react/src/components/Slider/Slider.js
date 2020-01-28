@@ -8,7 +8,7 @@ export default class Slider extends Component {
         <div id="slider" className={this.props.size}>
           <h1>{this.props.title}</h1>
           {this.props.btn && (
-            <Link href="blog.html" className="btn-white">
+            <Link to={"/blog"} className="btn-white">
               {this.props.btn}
             </Link>
           )}
