@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
-import GLOBAL from "../../Global";
 import Sidebar from "../Sidebar/Sidebar";
 import ReactImage from "../../assets/images/logo.svg";
+
+// Importing the Back-end API url / HTTP requests.
+import axios from "axios";
+import GLOBAL from "../../Global";
 
 // CSS import.
 import "../Article/Article.css";
@@ -10,6 +12,12 @@ import "../Article/Article.css";
 // Moment library to format dates.
 import Moment from "react-moment";
 import "moment/locale/es";
+
+// Custom alerts.
+import swal from "sweetalert";
+
+// Redirect to another components.
+import { Redirect } from "react-router-dom";
 
 export default class Article extends Component {
   /**
@@ -28,7 +36,11 @@ export default class Article extends Component {
 
   // Render method.
   render() {
+    if (this.state.status === "deleted")
+      return <Redirect to="/blog"></Redirect>;
+
     let article = this.state.article;
+
     return (
       <div className="center">
         <section id="content">
@@ -53,7 +65,9 @@ export default class Article extends Component {
               <p>{article.content}</p>
               <div className="buttons">
                 <button className="btn btn-warning">Editar</button>
-                <button className="btn btn-danger">Eliminar</button>
+                <button className="btn btn-danger" onClick={this.deleteArticle}>
+                  Eliminar
+                </button>
               </div>
               {/* LIMPIAR FLOATS */}
               <div className="clearfix"></div>
@@ -95,5 +109,33 @@ export default class Article extends Component {
           status: "success"
         });
       });
+  };
+
+  // Method to delete an article from the DB.
+  deleteArticle = () => {
+    swal({
+      title: "¿Estás seguro",
+      text: "Una vez borrado, no podrás recuperar el artículo",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        const ARTICLE_ID = this.state.article._id;
+        axios.delete(this.url + "article/" + ARTICLE_ID).then(response => {
+          this.setState({
+            article: false,
+            status: "deleted"
+          });
+        });
+        swal("¡Poof! El artículo ha sido eliminado correctamente", {
+          icon: "success"
+        });
+      } else {
+        swal("El artículo no ha sido borrado", {
+          icon: "success"
+        });
+      }
+    });
   };
 }

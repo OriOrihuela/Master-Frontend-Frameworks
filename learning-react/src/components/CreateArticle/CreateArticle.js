@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 
-// Importing the Back-end API url.
+// Importing the Back-end API url / HTTP requests.
 import GLOBAL from "../../Global";
-
-// Axios library to make HTTP requests.
 import axios from "axios";
 
 // Custom CSS.
@@ -15,6 +13,9 @@ import SimpleReactValidator from "simple-react-validator";
 
 // Redirecting import.
 import { Redirect } from "react-router-dom";
+
+// Custom alerts.
+import swal from "sweetalert";
 
 export default class CreateArticle extends Component {
   /**
@@ -122,6 +123,12 @@ export default class CreateArticle extends Component {
           article: response.data.article,
           status: "waiting"
         });
+        // Custom alert to tell the user the article has been created.
+        swal(
+          "Artículo creado",
+          "El artículo ha sido creado correctamente",
+          "success"
+        );
         // Uploading the image to the article.
         if (this.state.selectedFile !== null) {
           this.saveImage(response);
