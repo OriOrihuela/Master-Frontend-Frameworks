@@ -17,7 +17,7 @@ import "moment/locale/es";
 import swal from "sweetalert";
 
 // Redirect to another components.
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 export default class Article extends Component {
   /**
@@ -64,7 +64,7 @@ export default class Article extends Component {
               </span>
               <p>{article.content}</p>
               <div className="buttons">
-                <button className="btn btn-warning">Editar</button>
+                <Link to={"/blog/editar/" + article._id} className="btn btn-warning">Editar</Link>
                 <button className="btn btn-danger" onClick={this.deleteArticle}>
                   Eliminar
                 </button>
