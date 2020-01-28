@@ -26,8 +26,12 @@ export default class Articles extends Component {
     if (this.state.articles.length >= 1) {
       let articlesList = this.state.articles.map(article => {
         return (
-          <article id="article-template" class="article-item">
-            <div class="image-wrap">
+          <article
+            key={article._id}
+            id="article-template"
+            className="article-item"
+          >
+            <div className="image-wrap">
               {article.image !== null ? (
                 <img
                   src={this.url + "get-image/" + article.image}
@@ -38,14 +42,14 @@ export default class Articles extends Component {
               )}
             </div>
             <h2>{article.title}</h2>
-            <span class="date">
+            <span className="date">
               <Moment locale="es" fromNow>
                 {article.date}
               </Moment>
             </span>
             <Link to={"/blog/articulo/" + article._id}>Leer más</Link>
             {/* CLEAN FLOATS */}
-            <div class="clearfix"></div>
+            <div className="clearfix"></div>
           </article>
         );
       });

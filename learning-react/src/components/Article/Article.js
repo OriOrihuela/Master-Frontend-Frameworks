@@ -3,6 +3,7 @@ import axios from "axios";
 import GLOBAL from "../../Global";
 import Sidebar from "../Sidebar/Sidebar";
 import ReactImage from "../../assets/images/logo.svg";
+import { Link } from "react-router-dom";
 
 // CSS import.
 import "../Article/Article.css";
@@ -52,8 +53,8 @@ export default class Article extends Component {
               </span>
               <p>{article.content}</p>
               <div className="buttons">
-                <button className="btn btn-warning">Editar</button>
-                <button className="btn btn-danger">Eliminar</button>
+                <Link className="btn btn-warning">Editar</Link>
+                <Link className="btn btn-danger">Eliminar</Link>
               </div>
               {/* LIMPIAR FLOATS */}
               <div className="clearfix"></div>

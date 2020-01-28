@@ -11,6 +11,7 @@ import Peliculas from "./components/Peliculas/Peliculas";
 import Error from "./components/Error/Error";
 import Search from "./components/Search/Search";
 import Article from "./components/Article/Article";
+import CreateArticle from "./components/CreateArticle/CreateArticle";
 
 export default class Router extends Component {
   render() {
@@ -23,6 +24,7 @@ export default class Router extends Component {
           <Route exact path="/blog" component={Blog}></Route>
           <Route exact path="/formulario" component={Formulario}></Route>
           <Route exact path="/peliculas" component={Peliculas}></Route>
+          <Route exact path="/blog/crear" component={CreateArticle}></Route>
 
           {/* ROUTES WITH CUSTOM RENDER */}
           <Route
