@@ -16,7 +16,8 @@ export default class CreateArticle extends Component {
 
   state = {
     article: {},
-    status: null
+    status: null,
+    selectedFile: null
   };
 
   // Render method.
@@ -49,7 +50,11 @@ export default class CreateArticle extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="file0">Imagen</label>
-              <input type="file" name="file0"></input>
+              <input
+                type="file"
+                name="file0"
+                onChange={this.fileChange}
+              ></input>
             </div>
             <input
               type="submit"
@@ -73,14 +78,51 @@ export default class CreateArticle extends Component {
       if (response.data.article) {
         this.setState({
           article: response.data.article,
-          status: "success"
+          status: "waiting"
         });
+        // Uploading the image to the article.
+        if (this.state.selectedFile !== null) {
+          this.saveImage(response);
+        } else {
+          this.setState({
+            status: "success"
+          });
+        }
       } else {
         this.setState({
           status: "failed"
         });
       }
     });
+  };
+
+  // Method to save the image of an article.
+  saveImage = () => {
+    // Retrieve the article's ID.
+    const ARTICLE_ID = this.state.article._id;
+    // Create a Form data and add the file.
+    const FORM_DATA = new FormData();
+    FORM_DATA.append(
+      "file0",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+    // AJAX request.
+    axios
+      .post(this.url + "upload-image/" + ARTICLE_ID, FORM_DATA)
+      .then(response => {
+        if (response.data.article) {
+          this.setState({
+            article: response.data.article,
+            status: "success"
+          });
+        } else {
+          this.setState({
+            article: response.data.article,
+            status: "failed"
+          });
+        }
+      });
   };
 
   // Method to change the state of the component whenever the "saveArticle" is called.
@@ -90,6 +132,13 @@ export default class CreateArticle extends Component {
         title: this.titleRef.current.value,
         content: this.contentRef.current.value
       }
+    });
+  };
+
+  // Method to
+  fileChange = event => {
+    this.setState({
+      selectedFile: event.target.files[0]
     });
   };
 }
