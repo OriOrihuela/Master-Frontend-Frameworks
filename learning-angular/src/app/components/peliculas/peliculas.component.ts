@@ -9,11 +9,30 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   /**
    * PROPERTIES
    */
-  titulo: string;
+  peliculas: Array<any>;
 
   // Constructor
   constructor() {
-    this.titulo = "Componente peliculas";
+    this.peliculas = [
+      {
+        title: "Batman vs Superman",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6tNuPs5PSfZmfuZgHqnbnXvaKVC7tyZ53YIW0K8BwMUJh8QWq&s",
+        year: 2019
+      },
+      {
+        title: "Gran Torino",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--DQBBY_3MqtNHYlJOe3C3jPK4mM3UrZM-PfpNYSh9ml5pCS5&s",
+        year: 2065
+      },
+      {
+        title: "El señor de los anillos",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0gOGi-dQQ5xaBpdS0a8YyMrnMUslwsFTtq4QDJ4REyPLRp64DjQ&s",
+        year: 3000
+      }
+    ];
     console.log("Constructor lanzado");
   }
 
@@ -34,12 +53,5 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   // Whenever the component is destroyed...
   ngOnDestroy() {
     console.log("OnDestroy lanzado");
-  }
-
-  /**
-   * OWN METHODS
-   */
-  cambiarTitulo() {
-    this.titulo = "El título ha sido cambiado";
   }
 }

@@ -23,7 +23,12 @@ export class PaginaComponent implements OnInit {
     // Retrieve the params from the URL.
     this.route.params.subscribe((params: Params) => {
       this.nombre = params.nombre;
-      this.apellidos = params.apellidos
+      this.apellidos = params.apellidos;
     });
+  }
+
+  redirect() {
+    // A redirection passing some parameters. Each parameters passes in order of appearance.
+    this.router.navigate(["/pagina-de-pruebas", "Eduardo", "Orihuela"]);
   }
 }

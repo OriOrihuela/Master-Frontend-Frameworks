@@ -1,6 +1,10 @@
 <h1 class="subheader">
   Página de pruebas
 </h1>
-<h2 *ngIf="nombre && apellidos">
+<h2 *ngIf="nombre && apellidos; else noHayParametros">
   Los parámetros recogidos son: {{ nombre + " " + apellidos }}
 </h2>
+<ng-template #noHayParametros>
+  <h2>No hay parametros en la url</h2>
+</ng-template>
+<button (click)="redirect()">Ponme nombre y apellidos</button>

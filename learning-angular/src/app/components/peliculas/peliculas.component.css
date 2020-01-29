@@ -1,0 +1,17 @@
+.year-green {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    display: block;
+    width: 121px;
+    text-align: center;
+}
+
+.year-red {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    display: block;
+    width: 121px;
+    text-align: center;
+}

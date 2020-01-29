@@ -1,6 +1,25 @@
 <h1 class="subheader">
-  Peliculas
+  Listado de películas
 </h1>
-
-<p>{{ titulo }}!</p>
-<button (click)="cambiarTitulo()">Púlsame</button>
+<div *ngIf="peliculas">
+  <article
+    *ngFor="let pelicula of peliculas; let index = index"
+    class="article-item"
+  >
+    <div class="image-wrap">
+      <img src="{{ pelicula.image }}" alt="{{ pelicula.title }}" />
+    </div>
+    <h2>{{ pelicula.title }}</h2>
+    <span class="date">Hace 5 minutos</span>
+    <a href="#">Leer más</a>
+    <span
+      [ngClass]="{
+        'year-green': pelicula.year < 3000,
+        'year-red': pelicula.year >= 3000
+      }"
+      >{{ pelicula.year }}</span
+    >
+    <!-- LIMPIAR FLOATS -->
+    <div class="clearfix"></div>
+  </article>
+</div>
