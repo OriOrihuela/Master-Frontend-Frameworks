@@ -7,6 +7,7 @@ import { BlogComponent } from "./components/blog/blog.component";
 import { FormularioComponent } from "./components/formulario/formulario.component";
 import { PeliculasComponent } from "./components/peliculas/peliculas.component";
 import { PaginaComponent } from "./components/pagina/pagina.component";
+import { ErrorComponent } from "./components/error/error.component";
 
 // Array of routes.
 const ROUTES: Routes = [
@@ -30,9 +31,25 @@ const ROUTES: Routes = [
     path: "peliculas",
     component: PeliculasComponent
   },
+
+  // Routes with params.
   {
     path: "pagina-de-pruebas",
     component: PaginaComponent
+  },
+  {
+    path: "pagina-de-pruebas/:nombre",
+    component: PaginaComponent
+  },
+  {
+    path: "pagina-de-pruebas/:nombre/:apellidos",
+    component: PaginaComponent
+  },
+
+  // Error Route MUST BE the last one.
+  {
+    path: "**",
+    component: ErrorComponent
   }
 ];
 

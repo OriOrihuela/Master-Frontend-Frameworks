@@ -3,20 +3,44 @@
   <div class="center">
     <!-- LOGO -->
     <div id="logo">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsyyOHsh6O7cnrzr_hX3C0XfMbC521rfplzWfw7Z3jFqRmJRFC&s" alt="logotipo" class="app-logo" />
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsyyOHsh6O7cnrzr_hX3C0XfMbC521rfplzWfw7Z3jFqRmJRFC&s"
+        alt="logotipo"
+        class="app-logo"
+      />
       <span id="brand"><strong>Curso</strong> Angular</span>
     </div>
     <!-- NAVIGATION MENU -->
     <nav id="menu">
       <ul>
         <li>
-          <a href="index.html">Inicio</a>
+          <a [routerLink]="['/home']" routerLinkActive="router-link-active"
+            >Inicio</a
+          >
         </li>
         <li>
-          <a href="blog.html">Blog</a>
+          <a [routerLink]="['/blog']" routerLinkActive="router-link-active"
+            >Blog</a
+          >
         </li>
         <li>
-          <a href="formulario.html">Formulario</a>
+          <a
+            [routerLink]="['/formulario']"
+            routerLinkActive="router-link-active"
+            >Formulario</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['/peliculas']" routerLinkActive="router-link-active"
+            >Películas</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/pagina-de-pruebas']"
+            routerLinkActive="router-link-active"
+            >Pruebas</a
+          >
         </li>
       </ul>
     </nav>
