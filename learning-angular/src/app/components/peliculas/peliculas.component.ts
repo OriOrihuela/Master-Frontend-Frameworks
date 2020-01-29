@@ -32,7 +32,7 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   // Whenever the component is destroyed...
-  OnDestroy() {
+  ngOnDestroy() {
     console.log("OnDestroy lanzado");
   }
 
