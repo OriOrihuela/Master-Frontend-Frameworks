@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck, OnDestroy } from "@angular/core";
+import Pelicula from "../../models/Pelicula";
 
 @Component({
   selector: "app-peliculas",
@@ -9,29 +10,26 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   /**
    * PROPERTIES
    */
-  peliculas: Array<any>;
+  peliculas: Array<Pelicula>;
 
   // Constructor
   constructor() {
     this.peliculas = [
-      {
-        title: "Batman vs Superman",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6tNuPs5PSfZmfuZgHqnbnXvaKVC7tyZ53YIW0K8BwMUJh8QWq&s",
-        year: 2019
-      },
-      {
-        title: "Gran Torino",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--DQBBY_3MqtNHYlJOe3C3jPK4mM3UrZM-PfpNYSh9ml5pCS5&s",
-        year: 2065
-      },
-      {
-        title: "El señor de los anillos",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0gOGi-dQQ5xaBpdS0a8YyMrnMUslwsFTtq4QDJ4REyPLRp64DjQ&s",
-        year: 3000
-      }
+      new Pelicula(
+        "Batman vs Superman",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6tNuPs5PSfZmfuZgHqnbnXvaKVC7tyZ53YIW0K8BwMUJh8QWq&s",
+        2015
+      ),
+      new Pelicula(
+        "Gran Torino",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--DQBBY_3MqtNHYlJOe3C3jPK4mM3UrZM-PfpNYSh9ml5pCS5&s",
+        2008
+      ),
+      new Pelicula(
+        "El señor de los anillos",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0gOGi-dQQ5xaBpdS0a8YyMrnMUslwsFTtq4QDJ4REyPLRp64DjQ&s",
+        2003
+      )
     ];
     console.log("Constructor lanzado");
   }
