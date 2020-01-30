@@ -11,6 +11,7 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
    * PROPERTIES
    */
   peliculas: Array<Pelicula>;
+  peliculaFavorita: Pelicula;
 
   // Constructor
   constructor() {
@@ -51,5 +52,9 @@ export class PeliculasComponent implements OnInit, DoCheck, OnDestroy {
   // Whenever the component is destroyed...
   ngOnDestroy() {
     console.log("OnDestroy lanzado");
+  }
+
+  mostrarFavorita(event) {
+    this.peliculaFavorita = event;
   }
 }

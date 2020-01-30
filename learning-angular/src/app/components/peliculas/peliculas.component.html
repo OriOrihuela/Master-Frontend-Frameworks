@@ -4,27 +4,16 @@
     <h1 class="subheader">
       Listado de películas
     </h1>
-    <div *ngIf="peliculas">
-      <article
-        *ngFor="let pelicula of peliculas; let index = index"
-        class="article-item"
-      >
-        <div class="image-wrap">
-          <img src="{{ pelicula.image }}" alt="{{ pelicula.title }}" />
-        </div>
-        <h2>{{ pelicula.title }}</h2>
-        <span class="date">Hace 5 minutos</span>
-        <a href="#">Leer más</a>
-        <span
-          [ngClass]="{
-            'year-green': pelicula.year < 3000,
-            'year-red': pelicula.year >= 3000
-          }"
-          >{{ pelicula.year }}</span
-        >
-        <!-- LIMPIAR FLOATS -->
-        <div class="clearfix"></div>
-      </article>
+    <h2 class="subheader" *ngIf="peliculaFavorita">
+      La pelicula favorita es: {{ peliculaFavorita.title }}
+    </h2>
+    <div id="articles" *ngIf="peliculas">
+      <div *ngFor="let pelicula of peliculas; let index = index">
+        <app-pelicula
+          [pelicula]="pelicula"
+          (marcarFavorita)="mostrarFavorita($event)"
+        ></app-pelicula>
+      </div>
     </div>
   </section>
   <app-sidebar></app-sidebar>
